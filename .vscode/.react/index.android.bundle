@@ -47524,7 +47524,7 @@ var _firebase2 = babelHelpers.interopRequireDefault(_firebase);
 
 var _common = require(422                  ); // 422 = ./components/common
 
-var _LoginForm = require(427                     ); // 427 = ./components/LoginForm
+var _LoginForm = require(429                     ); // 429 = ./components/LoginForm
 
 var _LoginForm2 = babelHelpers.interopRequireDefault(_LoginForm);
 
@@ -47532,13 +47532,24 @@ var App = function (_Component) {
   babelHelpers.inherits(App, _Component);
 
   function App() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     babelHelpers.classCallCheck(this, App);
-    return babelHelpers.possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = { loggedIn: null }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
   babelHelpers.createClass(App, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      var _this2 = this;
+
       _firebase2.default.initializeApp({
         apiKey: 'AIzaSyCz45-YMuA_2zp1uvI-jzNpSUCiRU3yuYc',
         authDomain: 'auth-8070f.firebaseapp.com',
@@ -47547,6 +47558,53 @@ var App = function (_Component) {
         storageBucket: 'auth-8070f.appspot.com',
         messagingSenderId: '249730464025'
       });
+
+      _firebase2.default.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          _this2.setState({ loggedIn: true });
+        } else {
+          _this2.setState({ loggedIn: false });
+        }
+      });
+    }
+  }, {
+    key: 'renderContent',
+    value: function renderContent() {
+      switch (this.state.loggedIn) {
+        case true:
+          return _react2.default.createElement(
+            _reactNative.View,
+            { style: { height: 50 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 34
+              }
+            },
+            _react2.default.createElement(
+              _common.Button,
+              { onPress: function onPress() {
+                  return _firebase2.default.auth().signOut();
+                }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 35
+                }
+              },
+              ' Log Out '
+            )
+          );
+        case false:
+          return _react2.default.createElement(_LoginForm2.default, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 38
+            }
+          });
+        default:
+          return _react2.default.createElement(_common.Spinner, { size: 'large', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 40
+            }
+          });
+      }
     }
   }, {
     key: 'render',
@@ -47556,20 +47614,15 @@ var App = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 22
+            lineNumber: 46
           }
         },
         _react2.default.createElement(_common.Header, { headerText: 'Authentication', __source: {
             fileName: _jsxFileName,
-            lineNumber: 23
+            lineNumber: 47
           }
         }),
-        _react2.default.createElement(_LoginForm2.default, {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 24
-          }
-        })
+        this.renderContent()
       );
     }
   }]);
@@ -55455,7 +55508,7 @@ Object.keys(_Header).forEach(function (key) {
   });
 });
 
-var _Input = require(428      ); // 428 = ./Input
+var _Input = require(427      ); // 427 = ./Input
 
 Object.keys(_Input).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -55467,7 +55520,7 @@ Object.keys(_Input).forEach(function (key) {
   });
 });
 
-var _Spinner = require(429        ); // 429 = ./Spinner
+var _Spinner = require(428        ); // 428 = ./Spinner
 
 Object.keys(_Spinner).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -55495,18 +55548,19 @@ var Button = function Button(_ref) {
   var onPress = _ref.onPress,
       children = _ref.children;
 
+  console.log(children);
   return _react2.default.createElement(
     _reactNative.TouchableOpacity,
     { onPress: onPress, style: styles.buttonStyle, __source: {
         fileName: _jsxFileName,
-        lineNumber: 6
+        lineNumber: 7
       }
     },
     _react2.default.createElement(
       _reactNative.Text,
       { style: styles.textStyle, __source: {
           fileName: _jsxFileName,
-          lineNumber: 7
+          lineNumber: 8
         }
       },
       children
@@ -55755,7 +55809,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.Input = Input;
-}, 428, null, "auth/src/components/common/Input.js");
+}, 427, null, "auth/src/components/common/Input.js");
 __d(/* auth/src/components/common/Spinner.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -55795,7 +55849,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.Spinner = Spinner;
-}, 429, null, "auth/src/components/common/Spinner.js");
+}, 428, null, "auth/src/components/common/Spinner.js");
 __d(/* auth/src/components/LoginForm.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -55976,7 +56030,7 @@ var styles = _reactNative.StyleSheet.create({
 });
 
 exports.default = LoginForm;
-}, 427, null, "auth/src/components/LoginForm.js");
+}, 429, null, "auth/src/components/LoginForm.js");
 ;require(118);
 ;require(0);
 //# sourceMappingURL=index.android.map
